@@ -305,16 +305,8 @@ class Stream implements StreamInterface
      */
     public function getMetadata($key = null)
     {
-        if (null === $key) {
-            return stream_get_meta_data($this->resource);
-        }
-
         $metadata = stream_get_meta_data($this->resource);
-        if (! array_key_exists($key, $metadata)) {
-            return null;
-        }
-
-        return $metadata[$key];
+        return (null === $key) ? $metadata : ($metadata[$key] ?? null);
     }
 
     /**
